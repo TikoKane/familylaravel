@@ -1,0 +1,91 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <div class="inner-addon left-addon">
+    <i class="glyphicon glyphicon-search"></i>
+    <input type="text" class="form-control" placeholder="RECHERCHE PAR LIBELLE PRODUIT..." [(ngModel)]="filterString"/>
+</div>
+<br>
+    <div class="">
+      <nb-card>
+        <nb-card-header style="text-align: center;background-color: #2d8ac7"><h6> Liste des produits</h6></nb-card-header>
+        <nb-card-body>
+    <table class='table table-bordered'>
+      <thead style='background-color: #2d8ac7'>
+      <tr>
+        <th>#</th>
+        <th>Libellé du produit</th>
+        <th>Catégorie</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody style='background-color:white'>
+      <tr>
+        <tr *ngFor="let g of (produit | filterProduit: filterString) | paginate:{ itemsPerPage:20,currentPage:p};let i =index" class='even pointer'>
+          <th scope='row'>{{i+1}}</th>
+      <td class=''>{{g?.libelle}}</td>
+      <td class=''>{{g?.Categorie}}</td>
+     
+      <td><button nbButton status="danger" (click)="openWithoutEscClose(dialogSup,g?.id)"><i class="fa fa-trash" aria-hidden="true" ></i> Supprimer </button>
+        <button nbButton status="warning" (click)="openWithoutEscClose2(dialog,g?.id)"><i class="fa fa-edit" aria-hidden="true"></i> Modifier </button></td>
+    
+      </tr>
+     
+
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</nb-card-body>
+</nb-card>
+
+</div>
+</nb-card-body>
+</nb-card>
+
+<ng-template #dialogSup let-data let-ref="dialogRef">
+<nb-card>
+  <nb-card-header style="background-color: #2d8ac7">Suppression du Produit {{supProduit?.libelle}}</nb-card-header>
+  <nb-card-body>{{data}} {{supProduit?.libelle}} ?</nb-card-body>
+  <nb-card-footer>
+    <button type="submit" class='btn btn-danger btn-xs' (click)="deleteProd(supProduit?.id);ref.close()">Supprimer</button>
+    <button nbButton (click)="ref.close()">Annuler</button>
+  </nb-card-footer>
+</nb-card>
+</ng-template>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+<nb-card>
+  <nb-card-header style="background-color: #2d8ac7">Modification du Produit {{modifProd?.libelle}}</nb-card-header>
+  <nb-card-body>
+    <form class="form-horizontal form-label-left" #form="ngForm" (ngSubmit)="ModifierProduit(form);ref.close()">
+   
+    <div class="form-group row">
+      <label  class="label col-sm-3 col-form-label">Libelle Categorie</label>
+      <div class="col-sm-9">
+          <input #libelle="ngModel" id="first-name" value="{{modifProd?.libelle}}"  name="libelle" [(ngModel)]="modifProd.libelle" type="text" placeholder="{{produit?.libelle}}"  class="form-control col-md-7 col-xs-12" required="required" minlength="2" maxlength="50" size="50">                    
+        
+       </div>
+     </div>
+
+
+     <div class="form-group row">
+      <label  class="label col-sm-3 col-form-label">Veuillez choisir la catégorie</label>
+      <div class="col-sm-9">
+          <select name="categorie_id" id="first-name" [(ngModel)]="modifProd.categorie_id"  class="form-control col-md-7 col-xs-12" required="required" >
+              <option *ngFor="let cat of listecategorie" [value]="cat.id" >{{cat?.libelle}}</option>
+            </select>
+       </div>
+     </div>
+   
+    <div class="form-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button nbButton (click)="ref.close()">Annuler</button>
+        <button type="submit" class='btn btn-success btn-xs' >Modifier</button>
+
+      </div>
+    </div>
+     
+  </form>
+</nb-card-body>
+</nb-card>
+</ng-template>
+

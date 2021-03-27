@@ -1,0 +1,2 @@
+CD(magasin)
+npm start

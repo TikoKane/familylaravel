@@ -1,0 +1,116 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <div class="">
+      <nb-card >
+        <nb-card-header style="text-align: center;background-color: #2d8ac7"><h6> Vente Rapide promo %</h6></nb-card-header>
+        <nb-card-body>
+          <form #f="ngForm"  (ngSubmit)="onLogin(f)" >
+
+
+            <!--            version autocomplete categorie -->
+            <div class="form-group">
+              <label  class="label">Catégorie</label>
+              <ng-select [items]="categorie"
+                         bindLabel="libelle"
+                         bindValue="id"
+                         autofocus
+                         [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="contenue.idcategorie"
+                         (ngModelChange)="recuperation($event)">
+              </ng-select>
+            </div>
+            <div class="form-group"*ngIf="(produit | json) != '{}'">
+              <label  class="label">Produit</label>
+              <ng-select [items]="produit"
+                         bindLabel="libelle"
+                         bindValue="id"
+                         autofocus
+                         [ngModelOptions]="{standalone: true}"
+                         [(ngModel)]="contenue.idproduit"
+                         (ngModelChange)="recuperation($event)">
+              </ng-select>
+            </div>
+
+
+<!--            <div class="form-group" style="text-align: center">-->
+<!--              <label  class="label">Catégorie</label>-->
+<!--              <select  fullWidth class="form-control" name="idcategorie"  [(ngModel)]="contenue.idcategorie" (ngModelChange)="recuperation($event)">-->
+<!--                <option *ngFor="let c of categorie" [value]="c.id" >{{c.libelle}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            <div class="form-group" style="text-align: center" *ngIf="produit">-->
+<!--              <label  class="label">Produit</label>-->
+<!--              <select  fullWidth class="form-control" name="idProduit" [(ngModel)]="contenue.idproduit">-->
+<!--                <option >Veuiller choisir un produit</option>-->
+<!--                <option *ngFor="let p of produit" [value]="p.id" >{{p.libelle}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+
+            <div class="form-group" style="text-align: center">
+              <label  class="label">Quantité</label>
+              <input type="number" nbInput fullWidth status="info" required="required" placeholder="Entrer la quantité" name="Quantite" [(ngModel)]="contenue.quantite" min="1">
+            </div >
+            <div class="form-group" style="text-align: center">
+              <label  class="label">Prix unitaire</label>
+              <input type="number" nbInput fullWidth status="info" required="required" placeholder="Entrer le prix unitaire" name="PrixUnitaire" [(ngModel)]="contenue.pu" min="1">
+            </div>
+            <div class="form-group" style="text-align: center">
+              <label  class="label">Pourcentage promo </label>
+              <i class="fa fa-percent"></i>
+              <input type="number" nbInput fullWidth status="info" required="required" placeholder="Entrer le pourcentage (Ex: 10 = 10%)" name="PrixUnitairePromo" [(ngModel)]="puPromo" min="1">
+            </div>
+            <div class="buttons-row" style="text-align: center">
+            <button type='reset'nbButton status='danger' class="btn">Annuler</button>
+            <button type='submit'nbButton status='success' [disabled]="!f.valid" class="btn">Valider</button>
+            </div>
+
+
+            <br>
+            <br>
+            <br>
+
+          </form>
+          <table class='table table-bordered'>
+            <thead style='background-color: #2d8ac7'>
+            <tr>
+              <th>#</th>
+              <th>Produit</th>
+              <th>Quantité</th>
+              <th>Prix</th>
+              <th>Montant</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody style='background-color:white'>
+            <tr *ngFor="let t of tableau;let i=index" >
+              <th scope='row'>{{i+1}}</th>
+              <td>{{t.libelle}}</td>
+              <td>{{t.quantite}}</td>
+              <td>{{t.prixUnitaire}}</td>
+              <td>{{t.montant}}</td>
+              <td><a class='btn btn-danger btn-xs' (click)="suprimer(t.produit_id)" ><i class='fa fa-trash-o'></i> Supprimer </a></td>
+            </tr>
+
+            <tr>
+              <td colspan='4' ><b>TOTAL:</b></td>
+
+              <td><b>{{montant}}</b></td>
+            </tr>
+
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <br>
+          <div class="buttons-row" *ngIf="tableau">
+            <button nbButton status="danger" (click)="anullerVente()">Annuler</button>
+            <button nbButton status="success" name="venteEntreprise" [disabled]="!valider" (click)="validerVenteRapide()">VALIDER La VENTE</button>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+    </div>
+  </nb-card-body>
+</nb-card>
+
+

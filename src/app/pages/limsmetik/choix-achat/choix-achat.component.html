@@ -1,0 +1,18 @@
+<nb-card>
+  <nb-card-header style="text-align: center;background-color: #2d8ac7"><h6> Veuillez choisir le type de fournisseur</h6></nb-card-header>
+  <nb-card-body>
+
+    <div class="row show-grid">
+      <div class="col-md-6">
+        <div><button  nbButton status="primary" (click)="gotoAchatRapide()"><i class="fa fa-handshake" aria-hidden="true">
+          Achat Rapide
+        </i></button></div>
+      </div>
+      <div class="col-md-6">
+        <div><button nbButton status="success" (click)="gotoAchatFournisseur()"><i class="fa fa-user" aria-hidden="true">
+          Achat avec Fournisseur
+        </i></button></div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

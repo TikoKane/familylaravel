@@ -1,0 +1,112 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <div class="inner-addon left-addon">
+      <i class="glyphicon glyphicon-search"></i>
+      <input type="text" class="form-control" placeholder="RECHERCHE PAR PRENOM..." [(ngModel)]="filterString"/>
+  </div>
+  <br>
+    <div class="">
+      <nb-card>
+        <nb-card-header style="text-align: center;background-color: #2d8ac7"><h6> Liste des gérants</h6></nb-card-header>
+        <nb-card-body>
+    <table class='table table-bordered'>
+      <thead style='background-color: #2d8ac7'>
+      <tr>
+        <th>#</th>
+        <th>Nom complet</th>
+        <th>Téléphone</th>
+        <th>Profil</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody style='background-color:white'>
+      <tr *ngFor="let g of  (gerant | filter: filterString) | paginate:{ itemsPerPage:20,currentPage:p};let i =index">
+        <th scope='row' >{{i+1}}</th>
+        <td>{{g[0]?.prenom}} {{g[0]?.nom}}</td>
+        <td>{{g[0]?.tel}}</td>
+        <td *ngIf="g[0]?.typeUser_id==1">Admin</td>
+        <td *ngIf="g[0]?.typeUser_id==2">Vendeur</td>
+        <td><button nbButton  status="danger" (click)="openWithoutEscClose(dialogSup,g[0]?.id)"><i class="fa fa-trash" aria-hidden="true" ></i> Supprimer </button>
+         <button nbButton status="warning" (click)="openWithoutEscClose2(dialog,g[0]?.id)"><i class="fa fa-edit" aria-hidden="true"></i> Modifier </button></td>
+      </tr>
+
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+  </nb-card-body>
+</nb-card>
+
+</div>
+</nb-card-body>
+</nb-card>
+
+<ng-template #dialogSup let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header style="background-color: #2d8ac7">Suppression d'un gérant Gérant</nb-card-header>
+    <nb-card-body>{{ data }} {{gerAsupprim?.nom}} {{gerAsupprim?.prenom}}</nb-card-body>
+    <nb-card-footer>
+      <button type="submit" class='btn btn-danger btn-xs' (click)="deleteGerant(gerAsupprim?.id);ref.close()">Supprimer</button>
+      <button nbButton (click)="ref.close()">Annuler</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header style="background-color: #2d8ac7">Modification du gérant {{modifGerant?.prenom}} {{modifGerant?.nom}}</nb-card-header>
+    <nb-card-body>
+      <form class="form-horizontal form-label-left" #form="ngForm" (ngSubmit)="ModifierGerant(form) ;ref.close()">
+
+
+        <div class="form-group row">
+          <label  class="label col-sm-3 col-form-label">Prenom</label>
+          <div class="col-sm-9">
+            <input type="text" value="{{modifGerant?.prenom}}" #prenom="ngModel" name="prenom" [(ngModel)]=service.ger.prenom nbInput fullWidth  maxlength="50" size="50"  placeholder="Prenom" class="form-control col-md-7 col-xs-12" required="required">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label  class="label col-sm-3 col-form-label">Nom</label>
+          <div class="col-sm-9">
+            <input type="text" #nom="ngModel" value="{{modifGerant?.nom}}" name="nom" [(ngModel)]="service.ger.nom" nbInput fullWidth  placeholder="Nom"  maxlength="50" size="50" class="form-control col-md-7 col-xs-12" required="required">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label  class="label col-sm-3 col-form-label">Telephone</label>
+          <div class="col-sm-9">
+            <input type="number" #tel="ngModel" value="{{modifGerant?.tel}}" id="first-name"  name="tel" [(ngModel)]="service.ger.tel" nbInput fullWidth  maxlength="50" size="50" class="form-control col-md-7 col-xs-12" placeholder="Telephone" required="required">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label  class="label col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-9">
+            <input type="text" #email="ngModel" value="{{modifGerant?.email}}" name="email" [(ngModel)]="service.ger.email" nbInput fullWidth  maxlength="50" size="50" class="form-control col-md-7 col-xs-12" placeholder="Email" required="required">
+          </div>
+        </div>
+        <div class="form-group row" hidden="true">
+          <label  class="label col-sm-3 col-form-label">Login</label>
+          <div class="col-sm-9">
+            <input type="text" #login="ngModel" value="{{modifGerant?.login}}" name="login" [(ngModel)]="service.ger.login" nbInput fullWidth  maxlength="50" size="50" class="form-control col-md-7 col-xs-12" placeholder="Login" required="required">
+          </div>
+        </div>
+
+        <div class="form-group row" hidden="true">
+          <label class="col-sm-3 label">Type Gerant</label>
+          <div class="col-sm-9">
+            <select name="typeUser_id" #typeUser_id="ngModel" id="first-nameg" [(ngModel)]="service.ger.typeUser_id"   class="form-control col-md-7 col-xs-12"  fullWidth >
+              <option *ngFor="let user of listetpeUser" [value]="user?.id" >{{user.libelle}}</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="offset-sm-3 col-sm-9">
+            <button nbButton (click)="ref.close()">Annuler</button>
+            <button type="submit" class='btn btn-success btn-xs'>Modifier</button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+

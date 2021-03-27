@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header style="text-align: center;background-color: #2d8ac7"> <b><h6><i class="fa fa-search" aria-hidden="true" > Recherche facture</i></h6></b></nb-card-header>
+      <nb-card-body>
+        <form class="form-inline" #f="ngForm" (ngSubmit)="validervente(f.value)">
+
+          <input type="text" nbInput fullWidth placeholder="Veuillez entrer le numéro de la facture" required="required" name="NumeroFacture" ngModel >
+          <div class="form-group">
+            <button  type="submit" [disabled]="!f.valid" nbButton status="success"><i class="fa fa-search" aria-hidden="true"> Rechercher</i></button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header style="text-align: center;"><h4><b>  Ajout d'un produit </b></h4> </nb-card-header>
+      <nb-card-body>
+        <form #form="ngForm" (ngSubmit)="AjouterProduit(form)">
+          <div class="form-group row">
+            <label  class="label col-sm-3 col-form-label">Nom du produit</label>
+            <div class="col-sm-9">
+              <input #libelle="ngModel" name="libelle" [(ngModel)]="service.prod.libelle" type="text" placeholder="Entrer le nom du produit" required="required" minlength="2" maxlength="50" size="50" nbInput fullWidth >
+                
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="label col-sm-3 col-form-label">Type de catégorie</label>
+            <div class="col-sm-9">
+              <select fullWidth class="form-control" name="categorie_id" [(ngModel)]="service.prod.categorie_id" required="required" >
+                <option *ngFor="let cat of listecategorie" [value]="cat.id" >{{cat.libelle}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <button [disabled]="!form.valid" type="submit" nbButton status="success"> <i class="fa fa-check"> Valider</i></button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+
+

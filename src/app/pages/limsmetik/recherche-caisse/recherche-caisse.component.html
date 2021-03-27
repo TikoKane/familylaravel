@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      
+      <nb-card-header style="text-align: center;background-color: #2d8ac7"> <b><h6><i class="fa fa-search" aria-hidden="true" > Recherche par date</i></h6></b></nb-card-header>
+      <nb-card-body>
+        <form class="form-inline" #f="ngForm" (ngSubmit)="rechercheCaisse(f.value)">
+          <input  nbInput fullWidth placeholder="Veuillez choisir une date"  [nbDatepicker]="picker" required="required" name="NumeroFactur" ngModel >
+          <nb-datepicker #picker [min]="min" [max]="max" format="dd/MM/yyyy"  ></nb-datepicker>
+          <div class="form-group">
+            <button [disabled]="!f.valid"  type="submit" nbButton status="success"><i class="fa fa-search" aria-hidden="true"> Rechercher</i></button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12" [hidden]="!trouve">
+  <nb-card-body>
+    <div class="inner-addon left-addon">
+      <i class="glyphicon glyphicon-search"></i>
+      <input type="text" class="form-control" placeholder="RECHERCHE PAR NOM DU CLIENT..." [(ngModel)]="filterString"/>
+    </div>
+    <br>
+    <div class="">
+      <nb-card>
+        <nb-card-header style="background-color: #2d8ac7;text-align: center;">Liste des ventes</nb-card-header>
+        <nb-card-body>
+          <table class='table table-bordered'>
+            <thead style='background-color: #2d8ac7'>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Nom client</th>
+              <th>Nom vendeur</th>
+
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody style='background-color:white'>
+            <tr *ngFor="let t of (tableau | filterRechercheCaisse: filterString) | paginate:{ itemsPerPage:10,currentPage:p};let i=index" >
+              <th scope='row'>{{i+1}}</th>
+              <td>{{t.dateVente}}</td>
+              <td *ngIf="t.prenomClient && t.prenomClient=='anonyme'">{{t.nomClient}}</td>
+              <td *ngIf="t.nomClient">{{t.prenomClient }} {{t.nomClient}}</td>
+              <td *ngIf="t.raisonSocialClient"> {{t.raisonSocialClient}}</td>
+              <td>{{t.prenom }} {{t.nom}}</td>
+              <td><button nbButton status="success" (click)="gotoFacture(t.id)"><i class="fa fa-eye"> Voir facture</i></button>  </td>
+
+            </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls (pageChange)="p= $event"></pagination-controls>
+          <h3 align="center">Total vendu    :  <b> {{total}}</b>CFA</h3>
+        </nb-card-body>
+      </nb-card>
+
+    </div>
+  </nb-card-body>
+</nb-card>
+
+

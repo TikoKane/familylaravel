@@ -1,0 +1,101 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <div class="">
+      <nb-card>
+        <nb-card-header style="background-color: #2d8ac7">PRODUIT ACHETE</nb-card-header>
+        <nb-card-body>
+          <div class="x_content"  id="print-section" >
+
+            <div  id="gauche" >
+              <table  id="red">
+                <tbody>
+                <p class="element"><b>Fournisseur</b></p>
+                <tr>
+                  <th>Nom : </th>
+                  <td *ngIf="isParticulier()"><b>{{prenomFournisseur}}  {{nomFournisseur}}</b></td>
+                  <td *ngIf="isSimple()"><b>{{nomFournisseur}}</b></td>
+                  <td *ngIf="isEntreprise()"><b>{{raisonSocial_fournisseur}}</b></td>
+                </tr>
+                <tr>
+                  <th>Adresse  : </th>
+                  <td  *ngIf="isParticulier()"> {{adresseFournisseur}}</td>
+                  <td  *ngIf="isEntreprise()"> {{adresseFournisseur}}</td>
+                  <td *ngIf="isSimple()">anonyme</td>
+                </tr>
+                <tr>
+                  <th>Téléphone : </th>
+                  <td  *ngIf="isParticulier()">{{telephoneFourniseur}}</td>
+                  <td  *ngIf="isEntreprise()">{{telephoneFourniseur}}</td>
+                  <td *ngIf="isSimple()">anonyme</td>
+                </tr>
+                <tr>
+                  <th>Type client :</th>
+                  <td *ngIf="isParticulier()">Particulier</td>
+                  <td *ngIf="isEntreprise()">Entreprise</td>
+                  <td *ngIf="isSimple()">Simple</td>
+                </tr>
+                </tbody>
+              </table>
+            </div >
+            <div  id="droite" >
+              <table id="red1" >
+                <tbody>
+                <p class="element"><b> Paiement</b></p>
+                <tr>
+                  <th>Type paiement : </th>
+                  <td>Comptant</td>
+                </tr>
+                <tr>
+                  <th>Net à payer  :</th>
+                  <td> <b class="Pading">{{montant}} </b> </td>
+                </tr>
+                <tr>
+                  <th>Effectue par :</th>
+                  <td> <b class="Pading">{{prenomUser }} {{nomUser}}</b> </td>
+                </tr>
+                <tr>
+                  <th>Date :</th>
+                  <td> <b class="Pading">{{DateAchat}}</b> </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="clearfix"></div>
+
+          </div>
+            <br>
+          <table class='table table-bordered'>
+            <thead style='background-color: #2d8ac7'>
+            <tr>
+              <th>#</th>
+              <th>Produit</th>
+              <th>Quantite</th>
+              <th>Prix</th>
+              <th>Montant</th>
+
+            </tr>
+            </thead>
+            <tbody style='background-color:white' >
+            <tr *ngFor="let t of tableau[0];let i=index" >
+              <th scope='row'>{{i+1}}</th>
+              <td>{{t.libelle}}</td>
+              <td>{{t.quantite}}</td>
+              <td>{{t.prixUnitaire}}</td>
+              <td>{{t.montant}}</td>
+            </tr>
+            <tr>
+              <td colspan="4" ><b>TOTAL:</b></td>
+
+              <td *ngFor="let m of tableau[1]"><b>{{m.total}}</b></td>
+
+            </tr>
+
+            </tbody>
+          </table>
+
+        </nb-card-body>
+      </nb-card>
+
+    </div>
+  </nb-card-body>
+</nb-card>

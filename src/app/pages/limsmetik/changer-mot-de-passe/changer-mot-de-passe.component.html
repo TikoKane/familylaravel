@@ -1,0 +1,27 @@
+<div class="lists row">
+  <div class="col-md-8">
+    <nb-card class="list-card" style="margin-left: 40%;">
+      <nb-card-header style="text-align: center;"><b><u> Changement de mot de passe </u></b></nb-card-header>
+      <nb-card-body >
+<form #form="ngForm" (ngSubmit)="resetPass(form)" aria-labelledby="title">
+
+  <div class="form-group">
+    <label class="label" for="input-re-password">Nouveau mot de passe :</label>
+    <input type="text" #newPassword="ngModel"  name="newPassword" [(ngModel)]="service.up.newPassword" nbInput fullWidth id="inputEmail1" placeholder="Nouveau mot de passe" required="required">
+  </div>
+
+  <div class="form-group">
+    <label class="label" for="input-re-password">Confirmation :</label>
+    <input type="text" #confirmPassword="ngModel"  name="confirmPassword" [(ngModel)]="service.up.confirmPassword" nbInput fullWidth id="inputEmail1" placeholder="Confirmation" required="required">
+  </div>
+
+  <button
+  [disabled]="!form.valid" type="submit" nbButton status="success"
+      style="text-align: center;"><i class="fa fa-check" aria-hidden="true">
+    Changer le mot de passe</i>
+  </button>
+</form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

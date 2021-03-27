@@ -1,0 +1,41 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <div class="inner-addon left-addon">
+      <i class="glyphicon glyphicon-search"></i>
+      <input type="text" class="form-control" placeholder="RECHERCHE PAR DATE..." [(ngModel)]="filterString"/>
+  </div>
+<br>
+    <div class="">
+      <nb-card>
+        <nb-card-header style="text-align: center;background-color: #2d8ac7"><h6> Liste des achats</h6></nb-card-header>
+        <nb-card-body>
+    <table class='table table-bordered'>
+      <thead style='background-color: #2d8ac7'>
+      <tr>
+        <th>#</th>
+        <th>Date Achat</th>
+        <th>Produit(s) Acheté(s)</th>
+<!--        <th>Supprimé Produit(s)</th>-->
+
+
+      </tr>
+      </thead>
+      <tbody style='background-color:white' >
+      <tr *ngFor="let t of (tableau | orderBy:order:ascending | filterListeAchat: filterString) | paginate:{ itemsPerPage:10,currentPage:p};let i=index">
+           <th scope='row'>{{i+1}}</th>
+        <td>{{t.dateAchat}}</td>
+        <td > <button nbButton status="success" (click)="getAllproduitAchete(t.id)"><i class="fa fa-eye"> Voir Produits achetés</i></button>  </td>
+<!--        <td > <button nbButton status="danger" (click)="deleteproduitAchete(t.id)">Supprimé Produits achetés</button>  </td>-->
+
+      </tr>
+      <tbody>
+    </table>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+  </nb-card-body>
+</nb-card>
+
+</div>
+</nb-card-body>
+</nb-card>
+
+
