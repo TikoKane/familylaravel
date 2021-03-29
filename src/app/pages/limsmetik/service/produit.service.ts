@@ -7,7 +7,7 @@ import {Produit} from "./general.model";
 })
 export class ProduitService {
 
-  private host: string = 'http://samastock.alwaysdata.net/loetfrere/api';
+  private host: string = 'https://samastock.alwaysdata.net/loetfrere/api';
   constructor(private http:HttpClient) { }
   prod : Produit;
   getAllProduitByMagasin(id){
