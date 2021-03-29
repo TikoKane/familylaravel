@@ -6,7 +6,7 @@ import {Contenue, Entreprise, Particulier, ContenuePromo} from "../../../users.m
   providedIn: 'root'
 })
 export class VenteProduitService {
-  private host: string = 'http://samastock.alwaysdata.net/bakary/api';
+  private host: string = 'http://samastock.alwaysdata.net/loetfrere/api';
   constructor(private http:HttpClient) { }
   getStok(idmagasin){
     return this.http.get(this.host+"/stockproduit/bymagasin/"+idmagasin+"?token="+localStorage.getItem('token'));

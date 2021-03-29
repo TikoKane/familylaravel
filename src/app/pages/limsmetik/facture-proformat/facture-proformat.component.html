@@ -34,9 +34,8 @@
             <div class="x_content"  id="print-section" >
               <div class="row">
                 <div class="col-md-4">
-                  <img src="../../../../assets/1601173855286.png" width="150px">
+                  <img src="../../../../assets/WhatsApp Image 2021-03-29 at 11.43.22 AM.jpeg" width="350px">
                   <br>
-                  <b>La Lumiere du Senegal</b>
                 </div>
                 <div   class="col-md-4" style="margin-left: 8%;">
                   <img *ngIf="infoFacture['promo']>0" src="../../../../assets/promo.jpg" width="120px" >
@@ -49,26 +48,31 @@
               <br>
               <br>
 
+                  
               <div  id="gauche" >
                 <table  id="red">
                   <tbody>
                   <p class="element"><b>Client</b></p>
                   <tr>
                     <th>Nom : </th>
-                    <td *ngIf="isParticulier()"><b>{{infoClient['client'].prenomClient}}  {{infoClient['client'].nomClient}}</b></td>
-                    <td *ngIf="isSimple()"><b>{{infoClient['client'].nomClient}}</b></td>
-                    <td *ngIf="isEntreprise()"><b>{{infoClient['client'].raisonSocialClient}}</b></td>
+                    <td *ngIf="isParticulier()">{{infoClient['client'].prenomClient}}  {{infoClient['client'].nomClient}}</td>
+                    <td *ngIf="isSimple()">{{infoClient['client'].nomClient}}</td>
+                    <td *ngIf="isEntreprise()">{{infoClient['client'].raisonSocialClient}}</td>
                   </tr>
                   <tr>
                     <th>Adresse  : </th>
-                    <td> {{infoClient['client'].adresseClient}}</td>
+                    <td *ngIf="isParticulier()"> {{infoClient['client'].adresseClient}}</td>
+                    <td *ngIf="isEntreprise()"> {{infoClient['client'].adresseClient}}</td>
+                    <td *ngIf="isSimple()">{{infoClient['client'].nomClient}}</td>
                   </tr>
                   <tr>
                     <th>Téléphone : </th>
-                    <td>{{infoClient['client'].telClient}} </td>
+                    <td *ngIf="isParticulier()">{{infoClient['client'].telClient}}</td>
+                    <td *ngIf="isEntreprise()">{{infoClient['client'].telClient}}</td>
+                    <td *ngIf="isSimple()">{{infoClient['client'].nomClient}}</td>
                   </tr>
                   <tr>
-                    <th>Type client :</th>
+                    <th>Type client : </th>
                     <td *ngIf="isParticulier()">Particulier</td>
                     <td *ngIf="isEntreprise()">Entreprise</td>
                     <td *ngIf="isSimple()">Simple</td>
@@ -80,22 +84,22 @@
               <div  id="droite" >
                 <table id="red1" >
                   <tbody>
-                  <p class="element"><b> Paiement</b></p>
+                  <p class="element"><b class="Pading"> Paiement </b></p>
                   <tr>
-                    <th>Type paiement : </th>
-                    <td>Comptant</td>
+                    <th>Paiement : </th>
+                    <td><b class="Pading"> Comptant</b></td>
                   </tr>
                   <tr>
-                    <th>Net à payer  :</th>
+                    <th>Net à payer  : </th>
                     <td> <b class="Pading">{{MontantAPayer | currency:"XAF":"symbol":'3.0':'fr'}} </b> </td>
                   </tr>
                   <tr>
-                    <th>Effectue par :</th>
-                    <td> <b class="Pading">{{infoUser.prenom}} {{infoUser.nom}} </b> </td>
+                    <th>Effectue par : </th>
+                    <td> <b class="Pading">{{infoUser.prenom}} {{infoUser.nom}}</b> </td>
                   </tr>
                   <tr>
-                    <th>Boutique :</th>
-                    <td> <b class="Pading">{{magasin}}</b> </td>
+                    <th>Boutique : </th>
+                    <td> <b class="Pading">Lô et frères</b> </td>
                   </tr>
                   </tbody>
                 </table>
@@ -151,20 +155,18 @@
                 <div class="notices">
                   <div><b>IMPORTANT:</b></div>
                   <div class="notice">
-                    <b>Aucun retour ne sera accepté au-delà de 24h</b>
-                    <br>La Lumiere du Senegal votre partenaire de confiance
-                    <br>Adresse: 35 .AV Petersen x Lyser-Dakar ; mail: Lalumieredusenegal221@gmail.com
-                    <br> Contact +221338246561 / 707098953 / 776690024
+                    <br>Lô et frères votre partenaire de confiance
+                    <br>Adresse: Rue Ousmane Socé Diop - Rufisaue en face CEM Abdoulaye Sadji
+                    <br> Contact 770381834 / 774007004 / 772125686
                     <b class="signature">Signature</b>
                   </div>
                 </div>
                 <footer>
                   <div class="footerr">
-                    Ges-Produit créée par  <b>@LIM'SMETIK</b><strong> Tel: 771922061 /771768180</strong>.
+                    Gestion de stock créée par  <b>@LIMSMETIK</b><strong> Tel: 771922061 /771768180</strong>.
                   </div>
                 </footer>
               </div>
-
 
             </div>
 

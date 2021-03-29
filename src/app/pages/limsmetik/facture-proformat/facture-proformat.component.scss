@@ -16,7 +16,7 @@
   margin: 3% 2% 2% 3% !important;
 }
 #gauche{
-  width: 18em;
+  width: 20em;
   border-radius: 15px;
   float: left;
   border: solid 1px;
@@ -27,12 +27,12 @@
 }
 
 #milieu{
-  align-content: center;
+align-content: center;
   margin-bottom: 2% !important;
   margin-right: 12% !important;
 }
 #droite{
-  width: 18em;
+  width: 20em;
   border-radius: 15px;
   float: right;
   border: solid 1px;
@@ -51,6 +51,11 @@
   border: 1px solid black;
   border-radius: 5px;
 
+}
+
+.signature{
+  float: right; text-align: right;text-decoration : underline;font-size: 2rem;
+  font-style: italic; margin-right: 2em;
 }
 
 .bande{

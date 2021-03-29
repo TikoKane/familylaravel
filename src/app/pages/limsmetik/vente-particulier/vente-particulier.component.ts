@@ -171,6 +171,7 @@ export class VenteParticulierComponent implements OnInit {
 
   validervente(f: NgForm) {
     this.serviceVente.validerventeParticulier(this.particulier).subscribe(resp => {
+      console.log(f.value)
       if(resp['success']==true) {
         this.valider = false;
         this.trouve = false;

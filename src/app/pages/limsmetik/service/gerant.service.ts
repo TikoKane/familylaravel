@@ -5,7 +5,7 @@ import { Gerant, ChangeMotDePasse } from './general.model';
   providedIn: 'root'
 })
 export class GerantService {
-  private host: string = 'http://samastock.alwaysdata.net/bakary/api';
+  private host: string = 'http://samastock.alwaysdata.net/loetfrere/api';
   constructor(private http:HttpClient) { }
   ger : Gerant;
   up : ChangeMotDePasse;

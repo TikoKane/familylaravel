@@ -3,7 +3,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'filterCaisseJournaliere'
 })
-
 export class FilterCaisseJournalierePipe implements PipeTransform {
 
   public transform(values: any[], filterCaisseJournaliere: string): any[] {
@@ -14,3 +13,4 @@ export class FilterCaisseJournalierePipe implements PipeTransform {
   }
 
 }
+

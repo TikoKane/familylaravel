@@ -14,7 +14,7 @@ registerLocaleData(localeFr, 'fr');
 export class CaisseJournaliereComponent implements OnInit {
   tableau;total;
   p:number=1;
-filterString = '';
+filterString= '';
 order = "id";
 ascending = false;
 idFacture ;

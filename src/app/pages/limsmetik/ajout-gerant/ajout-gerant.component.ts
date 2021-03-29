@@ -116,6 +116,7 @@ this.service.insertGerant(form.value,localStorage.getItem('idmagasin')).subscrib
  
 }
 else{
+  console.log(form.value);
   this.showToastErreur(this.status2, this.title2, this.content2);
 }
 },error1 => {console.log(error1['ok'])

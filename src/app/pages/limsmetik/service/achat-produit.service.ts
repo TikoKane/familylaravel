@@ -7,7 +7,7 @@ import {Contenue, Data, Entreprise, Particulier, Personne} from "../../../users.
 })
 export class AchatProduitService {
 
-  private host: string = 'http://samastock.alwaysdata.net/bakary/api';
+  private host: string = 'http://samastock.alwaysdata.net/loetfrere/api';
 
   constructor(private http: HttpClient) {
   }
